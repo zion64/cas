@@ -2,4 +2,4 @@
 docker stop cas
 docker rm cas -f
 
-docker run -p 8080:8080 -p 8443:8443 --name="cas" apereo/cas 
+docker run -p 80:8080 -p 443:8443 --name="cas" apereo/cas:v4.1.1
