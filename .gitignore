@@ -4,3 +4,6 @@
 **/build/
 *.log
 classes/
+*.iml
+*.ipr
+*.iws
