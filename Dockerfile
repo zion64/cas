@@ -29,17 +29,18 @@ RUN cd / \
     && mkdir /etc/cas \
     && mkdir /etc/cas/jetty \
     && mkdir -p cas-overlay/bin \
-    && mkdir -p cas-overlay/src/main/webapp/WEB-INF/spring-configuration \
+    && mkdir -p cas-overlay/src/main/webapp \
     && cp cas-overlay/etc/*.* /etc/cas;
 
-COPY bin/ /usr/local/bin/
 COPY src/main/webapp/ cas-overlay/src/main/webapp/
 COPY thekeystore /etc/cas/jetty/
+COPY bin/*.* cas-overlay/bin
 
-RUN chmod -R 750 cas-overlay/bin/ \
+RUN chmod -R 750 cas-overlay/bin \
+    && chmod 750 cas-overlay/mvnw \
     && chmod 750 /opt/jre-home/bin/java \
-    && chmod 750 /usr/local/bin/run-jetty.sh
+	&& chmod 750 /opt/jre-home/jre/bin/java;
 
 EXPOSE 8080 8443
 
-CMD ["run-jetty.sh"]
+CMD ["/cas-overlay/bin/run-jetty.sh"]
