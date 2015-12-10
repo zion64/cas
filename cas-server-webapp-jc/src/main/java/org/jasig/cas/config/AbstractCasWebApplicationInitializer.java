@@ -22,6 +22,8 @@ import com.codahale.metrics.servlets.MetricsServlet;
 import com.codahale.metrics.servlets.PingServlet;
 import com.codahale.metrics.servlets.ThreadDumpServlet;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -32,12 +34,20 @@ import lombok.extern.slf4j.Slf4j;
 public abstract class AbstractCasWebApplicationInitializer
 		extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-	protected static final String CAS_SERVLET_NAME = "cas-servlet";
-
+	@Getter @Setter
+	private static String CAS_SERVLET_NAME = "cas-servlet";
+	
+	private static String CAS_HOME = "/opt/cas";
+	
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
-		super.onStartup(servletContext);
+		
+		String casHome = this.getCasHome(); 
+		if(!ObjectUtils.isEmpty(casHome)) CAS_HOME = casHome;
+		this.initCasHomeDir();
 
+		super.onStartup(servletContext);
+		
 		this.addAdditionalServlet(servletContext);
 	}
 
@@ -114,6 +124,8 @@ public abstract class AbstractCasWebApplicationInitializer
 	protected abstract String[] getSpringProfiles();
 
 	protected abstract String getDisplayName();
+	
+	protected abstract String getCasHome();
 
 	@Override
 	protected String getServletName() {
@@ -153,5 +165,21 @@ public abstract class AbstractCasWebApplicationInitializer
 				throw new IllegalStateException("Servlet cannot be mapped because url is conflicted with another ....");
 			}
 		}
+	}
+	
+	
+	/**
+	 * If CAS Home Directory not exist, make directory, sub-directory to be necessary and copy resources.
+	 * 
+	 * Directory Structure
+	 *   CAS_HOME/logs : log directory
+	 *   CAS_HOME/i18n : message sources directory
+	 *   CAS_HOME/conf : cas configuration directory
+	 * 
+	 * @return
+	 */
+	private Boolean initCasHomeDir() {
+		
+		return true;
 	}
 }
