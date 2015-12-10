@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-sources>
+	<data-source id="derby-1518dd1693b-5487e65a1b50f28e" provider="generic" driver="derby" name="Derby - resource" create-date="1449783468184" update-date="1449783789655" save-password="true" show-system-objects="true" read-only="false">
+		<connection server="" database="src/main/resources" url="jdbc:derby:src/main/resources" user="" type="prod">
+			<bootstrap txnIsolation="2" defaultObject="APP"/>
+		</connection>
+	</data-source>
+</data-sources>

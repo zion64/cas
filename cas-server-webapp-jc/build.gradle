@@ -37,6 +37,20 @@ dependencies {
     compile project(':cas-server-webapp-themes')
     compile project(':cas-server-webapp-validation')
 
+	compile(group: 'org.projectlombok', name: 'lombok', version: '1.16.6')
+	
+	compile(group: 'org.springframework.data', name: 'spring-data-jpa', version: springDataVersion) {
+		exclude(module: 'spring-orm')
+		exclude(module: 'spring-context')
+		exclude(module: 'spring-tx')
+		exclude(module: 'spring-beans')
+		exclude(module: 'spring-core')
+		exclude(module: 'aspectjrt')
+		exclude(module: 'slf4j-api')
+		exclude(module: 'jcl-over-slf4j')
+		exclude(module: 'spring-aop')
+	}
+	
     compile(group: 'org.springframework.security', name: 'spring-security-config', version: springSecVersion) {
         exclude(module: 'commons-logging')
         exclude(module: 'spring-core')
