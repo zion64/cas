@@ -1,4 +1,4 @@
-package org.jasig.cas.config;
+package org.jasig.cas.config.rootcontext;
 
 import java.sql.SQLException;
 
@@ -22,11 +22,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "org.jasig.cas.config.environment")
 @ComponentScan({ "org.jasig.cas.config.environment" })
-public class JpaPropertiesConfig {
+public class JpaEnvironmentConfig {
 
-    @Bean(name = "envDataSource")
-    public DataSource envDataSource() {
-        return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.DERBY).build();
+    @Bean(name = "envTransactionManager")
+    public PlatformTransactionManager envTransactionManager() throws SQLException {
+        return new JpaTransactionManager(this.envEntityManagerFactory());
     }
 
     @Bean(name = "envEntityManagerFactory")
@@ -42,9 +42,9 @@ public class JpaPropertiesConfig {
         return factory.getObject();
     }
 
-    @Bean(name = "envTransactionManager")
-    public PlatformTransactionManager envTransactionManager() throws SQLException {
-        return new JpaTransactionManager(this.envEntityManagerFactory());
+    @Bean(name = "envDataSource")
+    public DataSource envDataSource() {
+        return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.DERBY).build();
     }
 
     @Bean(name = "envHibernateExceptionTranslator")

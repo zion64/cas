@@ -13,7 +13,7 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/webflow-config http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.3.xsd">
 
-    <import resource="spring-configuration/propertyFileConfigurer.xml"/>
+    <import resource="javaconfig-spring-configuration/propertyFileConfigurer.xml"/>
 
     <bean id="themeChangeInterceptor"
           class="org.springframework.web.servlet.theme.ThemeChangeInterceptor"
