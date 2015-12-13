@@ -25,11 +25,11 @@
                       period="${metrics.refresh.internal:30s}"
                       duration-unit="MILLISECONDS"
                       rate-unit="MILLISECONDS"
-                      logger="perfStatsLogger"/>
+                      logger="perfStatsLogger" />
 
     <metrics:reporter type="jmx" metric-registry="metrics" />
 
-    <metrics:register metric-registry="metrics">
+    <metrics:register metric-registry="metrics" >
         <bean metrics:name="jvm.gc" class="com.codahale.metrics.jvm.GarbageCollectorMetricSet" />
         <bean metrics:name="jvm.memory" class="com.codahale.metrics.jvm.MemoryUsageGaugeSet" />
         <bean metrics:name="jvm.thread-states" class="com.codahale.metrics.jvm.ThreadStatesGaugeSet" />
